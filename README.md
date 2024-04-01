@@ -134,7 +134,7 @@ bwa index ref/hg19_chr8.fa
 
 This command indexes the reference genome file hg19_chr8.fa using the BWA aligner. Indexing is a necessary step for efficient alignment of sequencing reads.
 
-<img src="./readme_imgs/snakemake_pipeline_indexing.png"/>
+<img src="./imgs/snakemake_pipeline_indexing.png"/>
 
 2. Evidence the snakemake summary
 
@@ -144,7 +144,7 @@ snakemake --summary
 
 This command generates a summary of the Snakemake workflow, showing information such as the number of rules, targets and files to be created.
 
-<img src="./readme_imgs/snakemake_pipeline_summary.png"/>
+<img src="./imgs/snakemake_pipeline_summary.png"/>
 
 3. Execute the pipeline using Snakemake.
 
@@ -154,9 +154,9 @@ snakemake --cores 1 -p
 
 This command executes the Snakemake workflow using a single core (--cores 1) and prints the commands that are executed (-p).
 
-<img src="./readme_imgs/snakemake_pipeline_execution_1.png"/>
+<img src="./imgs/snakemake_pipeline_execution_1.png"/>
 
-<img src="./readme_imgs/snakemake_pipeline_execution_2.png"/>
+<img src="./imgs/snakemake_pipeline_execution_2.png"/>
 
 4. Monitor and manage pipeline execution.
 
@@ -166,6 +166,6 @@ samtools flagstat mapped_reads/father.bam
 
 This command uses samtools to generate flag statistics for the BAM file father.bam, which likely contains alignment information for sequencing reads from a sample named "father".
 
-<img src="./readme_imgs/snakemake_pipeline_stamtools.png"/>
+<img src="./imgs/snakemake_pipeline_stamtools.png"/>
 
 **Pipeline Execution with Snakemake2**
