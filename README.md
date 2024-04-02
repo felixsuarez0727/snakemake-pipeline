@@ -8,6 +8,7 @@ This example a bioinformatics pipeline depicts a series of orchestrated data pro
     <a href="#snakemake_workflow"> 🎯 Workflow | </a>
     <a href="#installation"> 🚀 Installation | </a>
     <a href="#usage"> 🛠️ Usage | </a>
+    <a href="#docker"> 🐳 Dockerimage | </a>
     
 </div>
 
@@ -136,7 +137,7 @@ This command indexes the reference genome file hg19_chr8.fa using the BWA aligne
 
 <img src="./imgs/snakemake_pipeline_indexing.png"/>
 
-2. Evidence the snakemake summary
+2. Show the snakemake summary
 
 ```bash
 snakemake --summary
@@ -169,3 +170,151 @@ This command uses samtools to generate flag statistics for the BAM file father.b
 <img src="./imgs/snakemake_pipeline_stamtools.png"/>
 
 **Pipeline Execution with Snakemake2**
+
+1. Remove the mapped_reads folder
+
+```bash
+rm mapped_reads/*.bam
+```
+
+This command removes all BAM files from the `mapped_reads/` directory.
+
+<img src="./imgs/mapped_reads_remove.png"/>
+
+2. Execute the pipeline Snakefile2
+
+```bash
+snakemake --cores 1 -p -s Snakefile2 mapped_reads/mother.bam
+```
+
+This command executes the Snakemake workflow using a single core and focuses on generating the output file `mother.bam`.
+
+<img src="./imgs/snakemake2_execution_1.png"/>
+
+<img src="./imgs/snakemake2_execution_2.png"/>
+
+3. Visualization of retuls with samtools
+
+```bash
+samtools flagstat mapped_reads/mother.bam
+```
+
+This command the samtools tool to compute flag statistics for the BAM file named mother.bam. This file stores alignment data pertaining to sequencing reads originating from a biological sample labeled as `mother.bam`
+
+<img src="./imgs/snakemake2_results_visualization.png"/>
+
+4. Perform cleanup operations
+
+```bash
+snakemake --cores 1 -s Snakefile2 cleanup
+```
+
+This command executes the Snakemake workflow specified in `Snakefile2` and performs cleanup operations.
+
+<img src="./imgs/snakefile2_cleanup_operations.png"/>
+
+5. Generate multiple outputfiles
+
+```bash
+snakemake --cores 1 -p -s Snakefile2 mapped_reads/father.bam mapped_reads/mother.bam
+```
+
+This command executes the Snakemake workflow specified in `Snakefile2` and focuses on generating the output files `father.bam` and `mother.bam`.
+
+<img src="./imgs/snakefile2_multiple_execution_1.png"/>
+
+**Pipeline Execution with Snakemake3**
+
+1. Remove the mapped_reads folder
+
+```bash
+snakemake --cores 1 -s Snakefile2 cleanup
+```
+
+This command executes the Snakemake workflow specified in `Snakefile2` and performs cleanup operations.
+
+<img src="./imgs/snakefile2_cleanup_operations.png"/>
+
+2. Show the snakemake summary
+
+```bash
+snakemake --summary -s Snakefile3
+```
+
+This command generates a summary of the Snakemake workflow, showing information such as the number of rules, targets and files to be created.
+
+<img src="./imgs/snakemake3_pipeline_summary.png"/>
+
+3. Execute the pipeline Snakefile3
+
+```bash
+snakemake --cores 1 -s Snakefile3
+```
+
+This command executes the Snakemake workflow using a single core and focuses on generating the output files `father.bam`, `mother.bam` and `proband.bam`.
+
+<img src="./imgs/snakemake3_execution_1.png"/>
+
+<div id="docker"></div>
+
+## 🐳 Dockerimage
+
+To containerize the bioinformatics pipeline, Docker can be utilized. Below are the steps to build and run the Docker image:
+
+1. **Building the Docker Image:**
+
+```bash
+docker build -t snakemake_container -f dockerfile .
+```
+
+This command builds a Docker image named snakemake_container using the provided dockerfile.
+
+<img src="./imgs/build_docker_image.png"/>
+
+2. **Run the Docker Container:**
+
+```bash
+docker run -it --rm snakemake_container bash
+```
+
+This command runs a Docker container interactively using the snakemake_container image, providing a Bash shell.
+
+<img src="./imgs/run_docker_image.png"/>
+
+3. **Index the Reference Genome:**
+
+```bash
+bwa index ref/hg19_chr8.fa
+```
+
+Index the reference genome file hg19_chr8.fa using the BWA aligner.
+
+<img src="./imgs/index_reference_gnome_docker.png"/>
+
+4. **Generate Snakemake Summary:**
+
+```bash
+snakemake --summary
+```
+
+This command generates a `summary` of the Snakemake workflow.
+
+<img src="./imgs/summary_docker.png"/>
+
+5. **Execute Snakemake Workflow:**
+
+```bash
+snakemake --cores 1 -s Snakefile
+```
+
+This command executes the `Snakemake` workflow using a single core.
+
+<img src="./imgs/snakfile1_docker.png"/>
+
+6. **Visualize Results with Samtools:**
+
+```bash
+samtools flagstat mapped_reads/father.bam
+```
+
+This com
