@@ -267,7 +267,7 @@ To containerize the bioinformatics pipeline, Docker can be utilized. Below are t
 docker build -t snakemake_container -f dockerfile .
 ```
 
-This command builds a Docker image named snakemake_container using the provided dockerfile.
+This command builds a Docker image named `snakemake_container` using the provided dockerfile.
 
 <img src="./imgs/build_docker_image.png"/>
 
@@ -277,7 +277,7 @@ This command builds a Docker image named snakemake_container using the provided 
 docker run -it --rm snakemake_container bash
 ```
 
-This command runs a Docker container interactively using the snakemake_container image, providing a Bash shell.
+This command runs a Docker container interactively using the `snakemake_container` image, providing a Bash shell.
 
 <img src="./imgs/run_docker_image.png"/>
 
@@ -287,7 +287,7 @@ This command runs a Docker container interactively using the snakemake_container
 bwa index ref/hg19_chr8.fa
 ```
 
-Index the reference genome file hg19_chr8.fa using the BWA aligner.
+Index the reference genome file `hg19_chr8.fa` using the BWA aligner.
 
 <img src="./imgs/index_reference_gnome_docker.png"/>
 
@@ -317,4 +317,66 @@ This command executes the `Snakemake` workflow using a single core.
 samtools flagstat mapped_reads/father.bam
 ```
 
-This com
+This command generates flag statistics for the BAM file `father.bam`.
+
+<img src="./imgs/snakfile1_samtools_results_docker.png"/>
+
+7. **Remove mapped_reads:**
+
+```bash
+rm mapped_reads/*.bam
+```
+
+This command removes all BAM files from the `mapped_reads/` directory.
+
+<img src="./imgs/remove_mapped_files_docker.png"/>
+
+8. **Execute Snakefile2 Workflow:**
+
+```bash
+snakemake --cores 1 -p -s Snakefile2 mapped_reads/mother.bam
+```
+
+This command executes Snakefile2, focusing on generating the output file `mother.bam`.
+
+<img src="./imgs/snakfile2_docker.png"/>
+
+9. **Visualize Results with Samtools (Snakefile2):**
+
+```bash
+samtools flagstat mapped_reads/mother.bam
+```
+
+This command generates flag statistics for the BAM file `mother.bam`.
+
+<img src="./imgs/snakfile2_samtools_results_docker.png"/>
+
+10. **Cleanup Operation (Snakefile2):**
+
+```bash
+snakemake --cores 1 -s Snakefile2 cleanup
+```
+
+This command performs cleanup operations specified in `Snakefile2`.
+
+<img src="./imgs/snakfile2_cleanup_docker.png"/>
+
+11. **Execute Multiple Outputs (Snakefile2):**
+
+```bash
+snakemake --cores 1 -p -s Snakefile2 mapped_reads/father.bam mapped_reads/mother.bam
+```
+
+This command executes Snakefile2, focusing on generating the output files `father.bam` and `mother.bam`.
+
+<img src="./imgs/snakfile2_multiple_outputs_docker.png"/>
+
+12. **Execute Snakemake Workflow (Snakefile3):**
+
+```bash
+snakemake --cores 1 -s Snakefile3
+```
+
+This command executes the Snakemake workflow defined in `Snakefile3`.
+
+<img src="./imgs/snakfile3_docker.png"/>
