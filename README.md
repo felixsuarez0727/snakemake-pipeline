@@ -71,6 +71,8 @@ The project directory is organized as follows:
 
 <div id="snakemake_workflow"></div>
 
+</br>
+
 ## 🎯 Snakemake Workflow Explanation
 
 #### 🐍 Snakefile
@@ -92,6 +94,8 @@ Additionally, there's a cleanup rule to remove all BAM files from the `mapped_re
 After executing the Snakemake workflow, the mapped sequencing reads will be stored in BAM format in the `mapped_reads/` directory. These BAM files can be further analyzed using tools like Samtools or visualized using genome browsers to interpret the alignment results.
 
 <div id="installation"></div>
+
+</br>
 
 ## 🚀 Installation
 
@@ -124,6 +128,8 @@ cat links.txt | xargs -i -P 4 wget '{}'
 7.  Execute Snakemake using the desired Snakefile: `snakemake -s Snakefile`.
 
 <div id="usage"></div>
+
+</br>
 
 ## 🛠️ Usage
 
@@ -260,6 +266,8 @@ This command executes the Snakemake workflow using a single core and focuses on 
 <img src="./imgs/snakemake3_execution_1.png"/>
 
 <div id="docker"></div>
+
+</br>
 
 ## 🐳 Dockerimage
 
