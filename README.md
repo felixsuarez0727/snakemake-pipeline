@@ -31,11 +31,15 @@ There are several ways to build bioinformatics pipelines:
 
 <div id="snakemake_pipeline"></div>
 
+</br>
+
 ## 🐍 Snakemake Pipeline for DNA Sequence Mapping
 
 This Snakemake pipeline automates DNA sequence mapping using the BWA aligner, facilitating the alignment of sequencing reads to the human reference genome (`hg19_chr8.fa`) for multiple samples (`father, mother, and proband`). The pipeline uses the parallel processing for efficient handling of large-scale sequencing data.
 
 <div id="project_structure"></div>
+
+</br>
 
 ## 📂Project Structure
 
@@ -67,7 +71,7 @@ The project directory is organized as follows:
 
 <div id="snakemake_workflow"></div>
 
-### Snakemake Workflow Explanation
+## 🎯 Snakemake Workflow Explanation
 
 #### 🐍 Snakefile
 
